@@ -1,9 +1,13 @@
 "use client";
+import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { Menu } from "lucide-react";
 //GLOBAL
 import { Avatar } from "@/components/ui/avatar";
 import { useToggle } from "@/hooks/useToggle";
 import { COPY } from "@/lib/copy";
+import { ROUTES } from "@/lib/routes";
+import { useClickOutside } from "@/hooks/useClickOutside";
 //LOCAL
 import { MenuItem } from "./menuItem";
 
@@ -16,14 +20,20 @@ const USER_LINKS = [
 ];
 
 export const UserMenu = () => {
-  const currentUser = {};
+  const currentUser = null; //{}
 
-  const { value: isOpen, toggle } = useToggle();
+  const { value: isOpen, toggle, setFalse } = useToggle();
+  const boxRef = useClickOutside<HTMLDivElement>(setFalse);
+
+  const pathname = usePathname();
+  useEffect(() => {
+    setFalse();
+  }, [pathname, setFalse]);
 
   return (
-    <div className="relative">
+    <div ref={boxRef} className="relative">
       <div className="flex flex-row items-center gap-3">
-        <div className="hidden md:block text-sm font-semibold py-3 px-4 rounded-full hover:bg-neutral-100 transition cursor-pointer">
+        <div className="hidden md:block text-sm font-bold py-3 px-4 rounded-full hover:bg-neutral-100 transition cursor-pointer">
           {t.hostCta}
         </div>
         <div
@@ -48,15 +58,12 @@ export const UserMenu = () => {
                     label={link.label}
                   />
                 ))}
-                <MenuItem label={t.hostHome} />
+                <MenuItem label={t.hostHome} href={ROUTES.home} />
                 <hr />
-                <MenuItem label={t.logout} />
+                <MenuItem label={t.logout} href={ROUTES.home} />
               </>
             ) : (
-              <>
-                <MenuItem label={t.login} />
-                <MenuItem label={t.signup} />
-              </>
+              <MenuItem label={t.auth} href={ROUTES.auth} />
             )}
           </div>
         </div>

@@ -1,21 +1,17 @@
 export const ROUTES = {
   home: "/",
-  about: "/about",
-  login: "/login",
-  dashboard: "/dashboard",
-
+  auth: "/auth",
   // dynamic routes: use functions
-  blog: {
-    list: "/blog",
-    post: (slug: string) => `/blog/${slug}`,
-  },
-  user: {
-    profile: (id: string | number) => `/users/${id}`,
-    settings: (id: string | number) => `/users/${id}/settings`,
-  },
-
+  // blog: {
+  //   list: "/blog",
+  //   post: (slug: string) => `/blog/${slug}`,
+  // },
+  // user: {
+  //   profile: (id: string | number) => `/users/${id}`,
+  //   settings: (id: string | number) => `/users/${id}/settings`,
+  // },
   // with query params
-  search: (q: string) => `/search?q=${encodeURIComponent(q)}`,
+  // search: (q: string) => `/search?q=${encodeURIComponent(q)}`,
 } as const;
 
 //how to use?

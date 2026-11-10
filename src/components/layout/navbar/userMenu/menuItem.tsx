@@ -1,13 +1,6 @@
-"use client";
 import Link from "next/link";
 
-export const MenuItem = ({
-  href = "",
-  label,
-}: {
-  href?: string;
-  label: string;
-}) => {
+export const MenuItem = ({ href, label }: { href: string; label: string }) => {
   return (
     <Link
       href={href}

@@ -9,8 +9,7 @@ export const COPY = {
     },
     hostHome: "اقامتگاه خود را در ثبت کنید",
     logout: "خروج",
-    login: "ورود",
-    signup: "ثبت‌نام",
+    auth: "ورود | ثبت‌نام",
   },
   search: {
     location: "همه‌جا",
