@@ -1,47 +1,49 @@
 "use client";
-import { useState, type ChangeEvent, type FormEvent } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
 // GLOBAL
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 //LOCAL
 import { AuthHeader } from "./authHeader";
 
+export const schema = z.object({
+  mobile: z
+    .string()
+    .min(1, "شماره همراه را وارد کنید")
+    .max(11, "شماره همراه معتبر نیست")
+    .regex(/^09\d{9}$/, "شماره همراه معتبر نیست (مثال: 09123456789)"),
+});
+
 export default function AuthPage() {
-  const [mobile, setMobile] = useState("");
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm({
+    resolver: zodResolver(schema),
+  });
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setMobile(e.target.value);
-  };
-
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    // TODO: call send-OTP action / API with `mobile`
+  const onSubmit = async (data: { mobile: string }) => {
+    console.log(data);
   };
 
   return (
-    <main className="flex min-h-screen w-full items-center justify-center px-4">
-      <section className="w-full max-w-lg rounded-lg border border-gray-300 p-8">
+    <main className="min-h-screen w-full flex items-center justify-center">
+      <section className="p-8 w-full max-w-lg space-y-12 rounded-md border-2 border-neutral-300">
         <AuthHeader />
-
-        <form onSubmit={handleSubmit} noValidate>
-          <label htmlFor="mobile" className="mb-2 block text-sm text-gray-700">
-            شماره همراه
-          </label>
-
-          <input
-            id="mobile"
-            name="mobile"
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <Input
             type="tel"
-            inputMode="numeric"
-            autoComplete="tel"
-            dir="ltr"
-            placeholder="09123456789"
-            value={mobile}
-            onChange={handleChange}
-            className="w-full rounded-lg border border-gray-300 px-4 py-3 text-left outline-none focus:border-rose-500 focus:ring-2 focus:ring-rose-100"
+            label={"شماره همراه"}
+            id="mobile"
+            register={register}
+            errors={errors}
+            disabled={isSubmitting}
           />
-
           <div className="mt-4">
-            <Button onClick={() => {}} label="ادامه" />
+            <Button onClick={() => {}} label="ادامه" disabled={isSubmitting} />
           </div>
         </form>
       </section>
