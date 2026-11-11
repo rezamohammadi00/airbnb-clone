@@ -9,10 +9,12 @@
     "lint": "eslint",
     "commit": "cz",
     "db:generate": "npx drizzle-kit generate",
-    "db:migrate": "npx drizzle-kit migrate"
+    "db:migrate": "npx drizzle-kit migrate",
+    "auth:generate": "pnpm dlx auth@latest generate --output src/db/auth-schema.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^7.0.5",
+    "better-auth": "^1.7.21",
     "drizzle-orm": "1.0.0-rc.5",
     "lucide-react": "^1.71.0",
     "next": "16.4.6",

@@ -5,6 +5,7 @@ import { z } from "zod";
 // GLOBAL
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { phoneNumber } from "@/lib/auth-client";
 //LOCAL
 import { AuthHeader } from "./authHeader";
 
@@ -25,8 +26,11 @@ export default function AuthPage() {
     resolver: zodResolver(schema),
   });
 
-  const onSubmit = async (data: { mobile: string }) => {
-    console.log(data);
+  const onSubmit = async ({ mobile }: { mobile: string }) => {
+    const { data, error } = await phoneNumber.sendOtp({
+      phoneNumber: mobile,
+    });
+    console.log(data, error, "client");
   };
 
   return (
