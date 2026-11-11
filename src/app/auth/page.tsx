@@ -10,7 +10,7 @@ import { phoneNumber } from "@/lib/auth-client";
 import { AuthHeader } from "./authHeader";
 
 export const schema = z.object({
-  mobile: z
+  phoneNumber: z
     .string()
     .min(1, "شماره همراه را وارد کنید")
     .max(11, "شماره همراه معتبر نیست")
@@ -26,11 +26,19 @@ export default function AuthPage() {
     resolver: zodResolver(schema),
   });
 
-  const onSubmit = async ({ mobile }: { mobile: string }) => {
-    const { data, error } = await phoneNumber.sendOtp({
-      phoneNumber: mobile,
+  const onSubmit = async (data: { phoneNumber: string }) => {
+    const res = await phoneNumber.sendOtp({
+      phoneNumber: data.phoneNumber,
     });
-    console.log(data, error, "client");
+
+    const code = window.prompt("Enter the OTP from the terminal") as string;
+    await phoneNumber.verify({
+      phoneNumber: data.phoneNumber,
+      code: code,
+      disableSession: false,
+      updatePhoneNumber: false,
+    });
+    console.log(res.data, res.error, "client");
   };
 
   return (
@@ -41,7 +49,7 @@ export default function AuthPage() {
           <Input
             type="tel"
             label={"شماره همراه"}
-            id="mobile"
+            id="phoneNumber"
             register={register}
             errors={errors}
             disabled={isSubmitting}

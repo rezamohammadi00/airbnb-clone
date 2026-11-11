@@ -8,6 +8,7 @@ import { useToggle } from "@/hooks/useToggle";
 import { COPY } from "@/lib/copy";
 import { ROUTES } from "@/lib/routes";
 import { useClickOutside } from "@/hooks/useClickOutside";
+import { useSession, signOut } from "@/lib/auth-client";
 //LOCAL
 import { MenuItem } from "./menuItem";
 
@@ -20,7 +21,8 @@ const USER_LINKS = [
 ];
 
 export const UserMenu = () => {
-  const currentUser = null; //{}
+  const { data: session } = useSession();
+  const isLogin = !!session?.user?.id;
 
   const { value: isOpen, toggle, setFalse } = useToggle();
   const boxRef = useClickOutside<HTMLDivElement>(setFalse);
@@ -49,7 +51,7 @@ export const UserMenu = () => {
       {isOpen && (
         <div className="absolute rounded-xl shadow-md w-[40vw] md:w-3/4 bg-white overflow-hidden left-0 top-12 text-sm">
           <div className="flex flex-col cursor-pointer">
-            {currentUser ? (
+            {isLogin ? (
               <>
                 {USER_LINKS.map((link) => (
                   <MenuItem
@@ -60,7 +62,9 @@ export const UserMenu = () => {
                 ))}
                 <MenuItem label={t.hostHome} href={ROUTES.home} />
                 <hr />
-                <MenuItem label={t.logout} href={ROUTES.home} />
+                <button onClick={() => signOut()} className="flex">
+                  <MenuItem label={t.logout} href={"#"} />
+                </button>
               </>
             ) : (
               <MenuItem label={t.auth} href={ROUTES.auth} />
