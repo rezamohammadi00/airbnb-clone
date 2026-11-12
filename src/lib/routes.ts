@@ -1,6 +1,8 @@
 export const ROUTES = {
   home: "/",
   auth: "/auth",
+  accommodations: (q?: string) =>
+    q ? `/accommodations?q=${encodeURIComponent(q)}` : "/accommodations",
   // dynamic routes: use functions
   // blog: {
   //   list: "/blog",
@@ -10,8 +12,8 @@ export const ROUTES = {
   //   profile: (id: string | number) => `/users/${id}`,
   //   settings: (id: string | number) => `/users/${id}/settings`,
   // },
-  // with query params
   // search: (q: string) => `/search?q=${encodeURIComponent(q)}`,
+  // with query params
 } as const;
 
 //how to use?

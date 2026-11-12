@@ -1,6 +1,6 @@
 "use client";
 import { useEffect } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { Menu } from "lucide-react";
 //GLOBAL
 import { Avatar } from "@/components/ui/avatar";
@@ -21,6 +21,8 @@ const USER_LINKS = [
 ];
 
 export const UserMenu = () => {
+  const router = useRouter();
+
   const { data: session } = useSession();
   const isLogin = !!session?.user?.id;
 
@@ -31,6 +33,15 @@ export const UserMenu = () => {
   useEffect(() => {
     setFalse();
   }, [pathname, setFalse]);
+
+  const handleSignOut = () =>
+    signOut({
+      fetchOptions: {
+        onSuccess: () => {
+          router.refresh();
+        },
+      },
+    });
 
   return (
     <div ref={boxRef} className="relative">
@@ -62,7 +73,7 @@ export const UserMenu = () => {
                 ))}
                 <MenuItem label={t.hostHome} href={ROUTES.home} />
                 <hr />
-                <button onClick={() => signOut()} className="flex">
+                <button onClick={handleSignOut} className="flex">
                   <MenuItem label={t.logout} href={"#"} />
                 </button>
               </>

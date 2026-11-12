@@ -1,4 +1,4 @@
-import { betterAuth } from "better-auth";
+import { betterAuth } from "better-auth/minimal";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { phoneNumber } from "better-auth/plugins";
 import { db } from "@/db";
@@ -11,9 +11,10 @@ export const auth = betterAuth({
   }),
   plugins: [
     phoneNumber({
+      // otpLength: 6, (default is usually 5 mins)
       sendOTP: ({ phoneNumber, code }, ctx) => {
-        console.log(phoneNumber, code);
-        // Implement sending OTP code via SMS
+        console.log(`Sending SMS to ${phoneNumber}: Your OTP is ${code}`);
+        // integrate your SMS gateway here (e.g. Twilio)
       },
       signUpOnVerification: {
         getTempEmail: (phoneNumber) => {

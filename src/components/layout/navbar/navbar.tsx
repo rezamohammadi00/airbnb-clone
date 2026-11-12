@@ -8,7 +8,8 @@ import { Search } from "./search";
 
 export const Navbar = () => {
   return (
-    <nav className="fixed w-full bg-white z-10 shadow-sm">
+    <nav className="w-full bg-white z-10 shadow-sm">
+      {/* fixed class removed temporary*/}
       <div className="py-4 border-b">
         <Container>
           <div className="flex items-center justify-between gap-3 md:gap-0">

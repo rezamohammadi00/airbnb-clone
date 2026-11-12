@@ -1,3 +1,9 @@
+import { Categories } from "./categories";
+
 export default function HomePage() {
-  return <div className=""></div>;
+  return (
+    <div>
+      <Categories />
+    </div>
+  );
 }
