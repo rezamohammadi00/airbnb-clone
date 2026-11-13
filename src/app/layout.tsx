@@ -1,6 +1,12 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { cn } from "@/lib/utils";
+
+// dont remove that
+// import { Inter } from "next/font/google";
+// const inter = Inter({subsets:['latin'],variable:'--font-sans'});
+// className={cn("h-full", "antialiased", myFont.className, "font-sans", inter.variable)}
 
 const myFont = localFont({
   src: [
@@ -27,7 +33,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="fa"
       dir="rtl"
-      className={`${myFont.className} h-full antialiased`}
+      className={cn("h-full", "antialiased", "font-sans", myFont.className)}
     >
       {/*the browser use the default font weight of 400 */}
       <body className="min-h-full flex flex-col">{children}</body>

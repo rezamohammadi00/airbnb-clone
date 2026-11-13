@@ -54,8 +54,14 @@ export default function AuthPage() {
             errors={errors}
             disabled={isSubmitting}
           />
-          <div className="mt-4">
-            <Button onClick={() => {}} label="ادامه" disabled={isSubmitting} />
+          <div className="mt-4 w-full">
+            <Button
+              className={"w-full"}
+              onClick={() => {}}
+              disabled={isSubmitting}
+            >
+              ادامه
+            </Button>
           </div>
         </form>
       </section>
