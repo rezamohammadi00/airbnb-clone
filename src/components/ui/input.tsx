@@ -1,72 +1,19 @@
-"use client";
-import {
-  FieldErrors,
-  FieldValues,
-  Path,
-  UseFormRegister,
-} from "react-hook-form";
+import * as React from "react"
+import { Input as InputPrimitive } from "@base-ui/react/input"
+import { cn } from "cn"
 
-type IInputProps<T extends FieldValues> = {
-  id: Path<T>;
-  label: string;
-  type?: string;
-  disabled?: boolean;
-  formatPrice?: boolean;
-  required?: boolean;
-  register: UseFormRegister<T>;
-  errors: FieldErrors<T>;
-};
-
-export const Input = <T extends FieldValues>({
-  id,
-  label,
-  type = "text",
-  disabled,
-  formatPrice,
-  required,
-  register,
-  errors,
-}: IInputProps<T>) => {
-  const hasError = !!errors[id];
-
+function Input({ className, type, ...props }: React.ComponentProps<"input">) {
   return (
-    <div className="relative w-full">
-      {formatPrice && (
-        <span className="absolute inset-e-3 top-5 text-2xl text-neutral-700">
-          ریال
-        </span>
+    <InputPrimitive
+      type={type}
+      data-slot="input"
+      className={cn(
+        "h-9 w-full min-w-0 rounded-md border border-input bg-transparent px-2.5 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 md:text-sm dark:bg-input/30 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40",
+        className
       )}
+      {...props}
+    />
+  )
+}
 
-      <input
-        id={id}
-        disabled={disabled}
-        {...register(id, { required })}
-        placeholder=" "
-        type={type}
-        className={`
-          peer w-full rounded-md border-2 bg-white p-4 pt-6 font-light
-          text-start outline-none transition
-          disabled:cursor-not-allowed disabled:opacity-70
-          ${formatPrice ? "pe-16" : "pe-4"}
-          ${hasError ? "border-rose-500 focus:border-rose-500" : "border-neutral-300 focus:border-black"}
-        `}
-      />
-
-      <label
-        htmlFor={id}
-        className={`
-          pointer-events-none absolute inset-s-4 top-5 z-10
-          origin-top-right ltr:origin-top-left
-          -translate-y-4 scale-75 transform text-base duration-150
-          peer-placeholder-shown:translate-y-0
-          peer-placeholder-shown:scale-100
-          peer-focus:-translate-y-4
-          peer-focus:scale-75
-          ${hasError ? "text-rose-500" : "text-zinc-400"}
-        `}
-      >
-        {label}
-      </label>
-    </div>
-  );
-};
+export { Input }

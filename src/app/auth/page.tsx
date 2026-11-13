@@ -5,6 +5,7 @@ import { z } from "zod";
 // GLOBAL
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Field, FieldDescription, FieldLabel } from "@/components/ui/field";
 import { phoneNumber } from "@/lib/auth-client";
 //LOCAL
 import { AuthHeader } from "./authHeader";
@@ -46,16 +47,23 @@ export default function AuthPage() {
       <section className="p-8 w-full max-w-lg space-y-12 rounded-md border-2 border-neutral-300">
         <AuthHeader />
         <form onSubmit={handleSubmit(onSubmit)}>
-          <Input
-            type="tel"
-            label={"شماره همراه"}
-            id="phoneNumber"
-            register={register}
-            errors={errors}
-            disabled={isSubmitting}
-          />
+          <Field>
+            <FieldLabel htmlFor="checkout-7j9-card-number-uw1">
+              شماره همراه
+            </FieldLabel>
+            <Input
+              id="phoneNumber"
+              type="tel"
+              {...register("phoneNumber")}
+              disabled={isSubmitting}
+              placeholder="09167718891"
+              required
+            />
+            <FieldDescription>شماره همراه خود را وارد کنید</FieldDescription>
+          </Field>
           <div className="mt-4 w-full">
             <Button
+              type="submit"
               className={"w-full"}
               onClick={() => {}}
               disabled={isSubmitting}
