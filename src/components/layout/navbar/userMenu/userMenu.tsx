@@ -78,7 +78,7 @@ export const UserMenu = () => {
                 </button>
               </>
             ) : (
-              <MenuItem label={t.auth} href={ROUTES.auth} />
+              <MenuItem label={t.auth} href={ROUTES.sendOtp} />
             )}
           </div>
         </div>

@@ -1,6 +1,6 @@
 export const ROUTES = {
   home: "/",
-  auth: "/auth",
+  sendOtp: "/auth/send-otp",
   accommodations: (q?: string) =>
     q ? `/accommodations?q=${encodeURIComponent(q)}` : "/accommodations",
   // dynamic routes: use functions
