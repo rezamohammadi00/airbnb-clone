@@ -2,6 +2,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { cn } from "@/lib/utils";
+import { ThemeProvider } from "@/components/providers/theme-provider";
 
 // dont remove that
 // import { Inter } from "next/font/google";
@@ -34,9 +35,19 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="fa"
       dir="rtl"
       className={cn("h-full", "antialiased", "font-sans", myFont.className)}
+      suppressHydrationWarning
     >
       {/*the browser use the default font weight of 400 */}
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   );
 }

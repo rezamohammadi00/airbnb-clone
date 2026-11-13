@@ -11,6 +11,7 @@ import { useClickOutside } from "@/hooks/useClickOutside";
 import { useSession, signOut } from "@/lib/auth-client";
 //LOCAL
 import { MenuItem } from "./menuItem";
+import { ModeToggle } from "./modeToggle";
 
 const t = COPY.userMenu;
 const USER_LINKS = [
@@ -57,6 +58,7 @@ export const UserMenu = () => {
           <div className="hidden md:block">
             <Avatar src={""} />
           </div>
+          <ModeToggle />
         </div>
       </div>
       {isOpen && (
