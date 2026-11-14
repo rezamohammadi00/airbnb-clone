@@ -14,12 +14,12 @@ const myFont = localFont({
     {
       path: "../../public/fonts/IRANYekanX-Regular.woff2",
       weight: "400",
-      style: "normal", //font-normal
+      style: "normal", //✉️: font-normal
     },
     {
       path: "../../public/fonts/IRANYekanX-Bold.woff2",
       weight: "700",
-      style: "normal", //font-bold
+      style: "normal", //✉️: font-bold
     },
   ],
 });
@@ -37,7 +37,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={cn("h-full", "antialiased", "font-sans", myFont.className)}
       suppressHydrationWarning
     >
-      {/*the browser use the default font weight of 400 */}
+      {/*✉️: the browser use the default font weight of 400 */}
       <body className="min-h-full flex flex-col">
         <ThemeProvider
           attribute="class"

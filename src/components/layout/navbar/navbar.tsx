@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 // GLOBAL
+import { FilterSheet } from "@/components/features/accommodations/filterSheet";
 import { Container } from "@/components/layout/container";
 // LOCAL
 import { UserMenu } from "./userMenu";
@@ -23,7 +24,9 @@ export const Navbar = () => {
                 className="hidden md:block"
               />
             </Link>
-            <Search />
+            <FilterSheet>
+              <Search />
+            </FilterSheet>
             <UserMenu />
           </div>
         </Container>
