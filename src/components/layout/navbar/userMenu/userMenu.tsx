@@ -9,6 +9,7 @@ import { COPY } from "@/lib/copy";
 import { ROUTES } from "@/lib/routes";
 import { useClickOutside } from "@/hooks/useClickOutside";
 import { useSession, signOut } from "@/lib/auth-client";
+import { Button } from "@/components/ui/button";
 //LOCAL
 import { MenuItem } from "./menuItem";
 import { ModeToggle } from "./modeToggle";
@@ -50,11 +51,10 @@ export const UserMenu = () => {
         <div className="hidden md:block text-sm font-bold py-3 px-4 rounded-full hover:bg-neutral-100 transition cursor-pointer">
           {t.hostCta}
         </div>
-        <div
-          onClick={toggle}
-          className="p-4 md:py-1 md:px-2 border border-neutral-100 flex flex-row items-center gap-3 rounded-full cursor-pointer hover:shadow-md transition"
-        >
-          <Menu />
+        <div className="p-4 md:py-1 md:px-2 border flex flex-row items-center gap-3 rounded-full">
+          <Button variant="ghost" size="icon" onClick={toggle}>
+            <Menu />
+          </Button>
           <div className="hidden md:block">
             <Avatar src={""} />
           </div>
@@ -62,7 +62,7 @@ export const UserMenu = () => {
         </div>
       </div>
       {isOpen && (
-        <div className="absolute rounded-xl shadow-md w-[40vw] md:w-3/4 bg-white overflow-hidden left-0 top-12 text-sm">
+        <div className="absolute rounded-xl shadow-md w-[40vw] md:w-3/4 bg-background overflow-hidden left-0 top-12 text-sm">
           <div className="flex flex-col cursor-pointer">
             {isLogin ? (
               <>
