@@ -14,6 +14,18 @@ export const ROUTES = {
   // },
   // search: (q: string) => `/search?q=${encodeURIComponent(q)}`,
   // with query params
+  discussions: {
+    getHref: () => "/app/discussions",
+  },
+  discussion: {
+    getHref: (id: string) => `/app/discussions/${id}`,
+  },
+  users: {
+    getHref: () => "/app/users",
+  },
+  profile: {
+    getHref: () => "/app/profile",
+  },
 } as const;
 
 //how to use?
