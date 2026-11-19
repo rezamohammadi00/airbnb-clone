@@ -6,8 +6,12 @@ import { Container } from "@/components/layout/container";
 // LOCAL
 import { UserMenu } from "./userMenu";
 import { Search } from "./search";
+import { db } from "@/db";
+import { categories } from "@/db/schema";
 
-export const Navbar = () => {
+export const Navbar = async () => {
+  const allCategories = await db.select().from(categories);
+
   return (
     <nav className="w-full bg-white z-10 shadow-sm">
       {/* fixed class removed temporary*/}
@@ -24,7 +28,7 @@ export const Navbar = () => {
                 className="hidden md:block"
               />
             </Link>
-            <FilterSheet>
+            <FilterSheet categories={allCategories}>
               <Search />
             </FilterSheet>
             <UserMenu />

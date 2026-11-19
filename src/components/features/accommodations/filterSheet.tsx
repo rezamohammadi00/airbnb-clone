@@ -5,6 +5,8 @@ import { Controller, useForm, useWatch } from "react-hook-form";
 import * as z from "zod";
 import { getProvincesList, getCities } from "@code-plate/iran-cities";
 //
+import { ICategory } from "@/db/schema";
+import { Field } from "@/components/common/field";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -31,6 +33,7 @@ import { FieldError } from "@/components/ui/field";
 const formSchema = z.object({
   province: z.string(),
   city: z.string(),
+  categoryId: z.string(),
   capacity: z
     .number({ message: "تعداد نفرات را وارد کنید" })
     .int("عدد صحیح وارد کنید")
@@ -39,7 +42,13 @@ const formSchema = z.object({
 
 const provincesList = getProvincesList().map((i) => i.fa);
 
-export const FilterSheet = ({ children }: { children: ReactElement }) => {
+export const FilterSheet = ({
+  children,
+  categories,
+}: {
+  children: ReactElement;
+  categories: ICategory[];
+}) => {
   const {
     register,
     handleSubmit,
@@ -48,6 +57,7 @@ export const FilterSheet = ({ children }: { children: ReactElement }) => {
   } = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
+      categoryId: "",
       province: "",
       city: "",
       capacity: 1,
@@ -73,6 +83,34 @@ export const FilterSheet = ({ children }: { children: ReactElement }) => {
           </SheetDescription>
         </SheetHeader>
         <div className="grid flex-1 auto-rows-min gap-6 px-4">
+          <div className="grid gap-3">
+            <Field label="دسته‌بندی" name="categoryId" errors={errors}>
+              <Controller
+                control={control}
+                name="categoryId"
+                render={({ field }) => (
+                  <Combobox
+                    // disabled={isSubmitting}
+                    items={categories}
+                    value={field.value}
+                    onValueChange={field.onChange}
+                  >
+                    <ComboboxInput placeholder="دسته‌بندی را انتخاب کنید" />
+                    <ComboboxContent>
+                      <ComboboxEmpty>موردی یافت نشد.</ComboboxEmpty>
+                      <ComboboxList>
+                        {(item) => (
+                          <ComboboxItem key={item.id} value={item.id}>
+                            {item.name}
+                          </ComboboxItem>
+                        )}
+                      </ComboboxList>
+                    </ComboboxContent>
+                  </Combobox>
+                )}
+              />
+            </Field>
+          </div>
           <div className="grid gap-3">
             <Label htmlFor="sheet-demo-name">استان</Label>
             <Controller
