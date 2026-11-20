@@ -29,10 +29,8 @@ const provincesList = getProvincesList().map((i) => i.fa);
 
 export const CreateAccommodationForm = ({
   categories,
-  userId,
 }: {
   categories: ICategory[];
-  userId: string;
 }) => {
   const router = useRouter();
 

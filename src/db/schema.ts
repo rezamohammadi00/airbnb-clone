@@ -1,4 +1,5 @@
 export * from "./auth-schema";
+import { user } from "./auth-schema";
 
 import {
   integer,
@@ -28,10 +29,9 @@ export const accommodationStatus = pgEnum("accommodation_status", [
 ]);
 
 export const accommodations = pgTable("accommodations", {
-  // userId: text()
-  //   .notNull()
-  //   .references(() => user.id, { onDelete: "cascade" }),
   id: uuid().primaryKey().defaultRandom(),
+
+  userId: text().references(() => user.id, { onDelete: "set null" }),
   categoryId: uuid().references(() => categories.id, { onDelete: "set null" }),
   name: varchar().notNull(),
 
@@ -51,3 +51,4 @@ export const accommodations = pgTable("accommodations", {
     .defaultNow()
     .$onUpdate(() => new Date()),
 });
+export type IAccommodation = typeof accommodations.$inferSelect;

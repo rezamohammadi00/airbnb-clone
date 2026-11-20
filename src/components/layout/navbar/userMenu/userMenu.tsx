@@ -20,6 +20,7 @@ const USER_LINKS = [
   { label: t.links.favorites, href: "/favorites" },
   { label: t.links.reservations, href: "/reservations" },
   { label: t.links.properties, href: "/properties" },
+  { label: "ثبت اقامتگاه جدید", href: "/accommodations/create" },
 ];
 
 export const UserMenu = () => {

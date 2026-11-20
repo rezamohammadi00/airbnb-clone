@@ -1,10 +1,11 @@
 "use client";
 import { type ReactElement } from "react";
+import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm, useWatch } from "react-hook-form";
 import * as z from "zod";
 import { getProvincesList, getCities } from "@code-plate/iran-cities";
-//
+//Global Imports
 import { ICategory } from "@/db/schema";
 import { Field } from "@/components/common/field";
 import { Button } from "@/components/ui/button";
@@ -68,8 +69,9 @@ export const FilterSheet = ({
     name: "province",
   });
 
+  const router = useRouter();
   const onSubmit = (data: z.infer<typeof formSchema>) => {
-    console.log(data);
+    router.push("/accommodations");
   };
 
   return (
