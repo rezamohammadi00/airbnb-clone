@@ -1,10 +1,5 @@
 import localFont from "next/font/local";
 
-// dont remove that
-// import { Inter } from "next/font/google";
-// const inter = Inter({subsets:['latin'],variable:'--font-sans'});
-// className={cn("h-full", "antialiased", myFont.className, "font-sans", inter.variable)}
-
 export const myFont = localFont({
   src: [
     {
@@ -18,4 +13,7 @@ export const myFont = localFont({
       style: "normal", //✉️: font-bold
     },
   ],
+  variable: "--font-sans",
+  display: "swap",
+  fallback: ["system-ui", "sans-serif"],
 });

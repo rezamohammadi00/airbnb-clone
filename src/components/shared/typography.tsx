@@ -1,5 +1,8 @@
+//⚠️: Keep this list in sync with the sizes in typography.css .
+
 import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
+//Global Imports
 import { cn } from "@/lib/utils";
 
 const textVariants = cva("", {
@@ -18,7 +21,6 @@ const textVariants = cva("", {
       default: "text-foreground",
       muted: "text-muted-foreground",
       primary: "text-primary",
-      success: "text-success",
       destructive: "text-destructive",
     },
   },
@@ -37,7 +39,6 @@ const defaultTag: Record<Variant, React.ElementType> = {
   small: "span",
   caption: "span",
 };
-
 export interface TextProps
   extends
     Omit<React.HTMLAttributes<HTMLElement>, "color">,
@@ -62,3 +63,9 @@ export function Text({
 }
 
 export { textVariants };
+
+// Usage:
+// <Text variant="h1">Dashboard</Text>
+// <Text tone="muted">Last updated 2 minutes ago</Text>
+// <Text variant="h2" as="h3">Semantic h3, visual h2</Text>
+// <label className={textVariants({ variant: "small", tone: "muted" })}>Email</label>

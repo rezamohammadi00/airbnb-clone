@@ -11,7 +11,7 @@ export const AccommodationCard = ({
   accommodation,
 }: IAccommodationCardProps) => {
   return (
-    <section className="w-full flex flex-col gap-1">
+    <section className="w-full flex flex-col gap-2">
       <div className="relative w-full h-52">
         <Image
           fill
@@ -23,11 +23,11 @@ export const AccommodationCard = ({
 
       <Text variant={"h3"}>{accommodation?.name}</Text>
 
-      <Text>
+      <Text tone={"muted"}>
         {accommodation.province}،{accommodation.city}،{accommodation.capacity}
         نفر
       </Text>
-      
+
       <div className="flex gap-1 items-center">
         <Text>{accommodation.pricePerNight} تومن</Text>
         <Text variant="small">/هرشب</Text>

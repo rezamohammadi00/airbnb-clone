@@ -13,10 +13,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="fa"
       dir="rtl"
-      className={cn("antialiased font-sans", myFont.className)}
+      className={cn("antialiased", myFont.variable)}
       suppressHydrationWarning
     >
-      {/*✉️: the browser use the default font weight of 400 */}
+      {/*✉️: the browser use the default font weight of 400 and font size of 16px (the same as 1rem). */}
       <body>
         <Providers>{children}</Providers>
       </body>
