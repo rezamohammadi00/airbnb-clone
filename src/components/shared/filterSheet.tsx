@@ -7,7 +7,7 @@ import * as z from "zod";
 import { getProvincesList, getCities } from "@code-plate/iran-cities";
 //Global Imports
 import { ICategory } from "@/db/schema";
-import { Field } from "@/components/common/field";
+import { Field } from "@/components/shared/field";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -30,6 +30,7 @@ import {
   ComboboxList,
 } from "@/components/ui/combobox";
 import { FieldError } from "@/components/ui/field";
+import { useToggle } from "@/hooks/useToggle";
 
 const formSchema = z.object({
   province: z.string(),
@@ -50,6 +51,8 @@ export const FilterSheet = ({
   children: ReactElement;
   categories: ICategory[];
 }) => {
+  const { value: isOpen, setValue: setIsOpen } = useToggle(false);
+
   const {
     register,
     handleSubmit,
@@ -70,12 +73,14 @@ export const FilterSheet = ({
   });
 
   const router = useRouter();
+
   const onSubmit = (data: z.infer<typeof formSchema>) => {
+    setIsOpen(false);
     router.push("/accommodations");
   };
 
   return (
-    <Sheet>
+    <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger render={children} />
       <SheetContent>
         <SheetHeader>

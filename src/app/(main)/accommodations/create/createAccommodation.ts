@@ -3,7 +3,7 @@
 import { db } from "@/db";
 import { accommodations } from "@/db/schema";
 //Local Imports
-import { createAccommodationFormValues } from "./createAccommodationSchema";
+import { createAccommodationFormValues } from "./schema";
 
 export async function createAccommodation(
   formData: createAccommodationFormValues,

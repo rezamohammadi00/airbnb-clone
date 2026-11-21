@@ -1,6 +1,7 @@
 import Image from "next/image";
 //Global Imports
 import { IAccommodation } from "@/db/schema";
+import { Text } from "./typography";
 
 type IAccommodationCardProps = {
   accommodation: IAccommodation;
@@ -20,14 +21,16 @@ export const AccommodationCard = ({
         />
       </div>
 
-      <div className="font-bold text-lg">{accommodation?.name}</div>
-      <div className="text-muted-foreground">
+      <Text variant={"h3"}>{accommodation?.name}</Text>
+
+      <Text>
         {accommodation.province}،{accommodation.city}،{accommodation.capacity}
         نفر
-      </div>
-      <div className="flex gap-1 text-sm">
-        <p className="font-bold">{accommodation.pricePerNight} تومن</p>
-        <p className="text-muted-foreground">/هرشب</p>
+      </Text>
+      
+      <div className="flex gap-1 items-center">
+        <Text>{accommodation.pricePerNight} تومن</Text>
+        <Text variant="small">/هرشب</Text>
       </div>
     </section>
   );

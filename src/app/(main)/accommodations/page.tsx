@@ -1,7 +1,7 @@
 import { db } from "@/db";
 import { accommodations } from "@/db/schema";
-import { PageHeader } from "@/components/common/pageHeader";
-import { AccommodationCard } from "@/components/common/accommodationCard";
+import { PageHeader } from "@/components/shared/pageHeader";
+import { AccommodationCard } from "@/components/shared/accommodationCard";
 
 export default async function AccommodationsPage() {
   const allAccommodations = await db.select().from(accommodations);
@@ -12,7 +12,7 @@ export default async function AccommodationsPage() {
         title="اقامتگاها"
         description="برای ثبت اقامتگاه فرم زیر را تکمیل کنید."
       />
-      <div className="grid grid-cols-5 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  gap-4">
         {allAccommodations.map((i) => (
           <AccommodationCard key={i.id} accommodation={i} />
         ))}

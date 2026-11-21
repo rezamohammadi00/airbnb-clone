@@ -49,9 +49,9 @@ export const UserMenu = () => {
   return (
     <div ref={boxRef} className="relative">
       <div className="flex flex-row items-center gap-3">
-        <div className="hidden md:block text-sm font-bold py-3 px-4 rounded-full hover:bg-neutral-100 transition cursor-pointer">
+        {/* <div className="hidden md:block text-sm font-bold py-3 px-4 rounded-full hover:bg-neutral-100 transition cursor-pointer">
           {t.hostCta}
-        </div>
+        </div> */}
         <div className="p-4 md:py-1 md:px-2 border flex flex-row items-center gap-3 rounded-full">
           <Button variant="ghost" size="icon" onClick={toggle}>
             <Menu />

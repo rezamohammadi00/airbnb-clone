@@ -1,9 +1,9 @@
 //Global Imports
 import { db } from "@/db";
 import { categories } from "@/db/schema";
-import { PageHeader } from "@/components/common/pageHeader";
+import { PageHeader } from "@/components/shared/pageHeader";
 //Local Imports
-import { CreateAccommodationForm } from "./createAccommodationForm";
+import { CreateAccommodationForm } from "./form";
 
 export default async function CreateAccommodationPage() {
   const all = await db.select().from(categories);

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 // GLOBAL
-import { FilterSheet } from "@/components/features/accommodations/filterSheet";
+import { FilterSheet } from "@/components/shared/filterSheet";
 // LOCAL
 import { UserMenu } from "./userMenu";
 import { Search } from "./search";

@@ -6,7 +6,7 @@ import { getCities } from "@code-plate/iran-cities";
 import { getProvincesList } from "@code-plate/iran-cities";
 // GLOBAL
 import { ICategory } from "@/db/schema";
-import { Field } from "@/components/common/field";
+import { Field } from "@/components/shared/field";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -19,11 +19,11 @@ import {
   ComboboxList,
 } from "@/components/ui/combobox";
 //Local Imports
-import { createAccommodation } from "./actions";
+import { createAccommodation } from "./createAccommodation";
 import {
   createAccommodationSchema,
   createAccommodationFormValues,
-} from "./createAccommodationSchema";
+} from "./schema";
 
 const provincesList = getProvincesList().map((i) => i.fa);
 
