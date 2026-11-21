@@ -1,5 +1,7 @@
+// user
 export * from "./auth-schema";
 import { user } from "./auth-schema";
+// ___
 
 import {
   integer,
@@ -10,8 +12,10 @@ import {
   timestamp,
   uuid,
   varchar,
+  unique,
 } from "drizzle-orm/pg-core";
 
+// categories
 export const categories = pgTable("categories", {
   id: uuid().primaryKey().defaultRandom(),
   name: varchar().notNull().unique(),
@@ -20,6 +24,7 @@ export const categories = pgTable("categories", {
 
 export type ICategory = typeof categories.$inferSelect;
 
+// accommodations
 const DEFAULT_ACCOMMODATION_STATUS = "draft";
 export const accommodationStatus = pgEnum("accommodation_status", [
   DEFAULT_ACCOMMODATION_STATUS,
@@ -52,3 +57,23 @@ export const accommodations = pgTable("accommodations", {
     .$onUpdate(() => new Date()),
 });
 export type IAccommodation = typeof accommodations.$inferSelect;
+
+// favorites
+export const favorites = pgTable(
+  "favorites",
+  {
+    id: uuid().primaryKey().defaultRandom(),
+    userId: text()
+      .notNull()
+      .references(() => user.id, { onDelete: "cascade" }),
+    accommodationId: uuid()
+      .notNull()
+      .references(() => accommodations.id, { onDelete: "cascade" }),
+  },
+  (t) => [
+    unique("favorites_user_accommodation_unique").on(
+      t.userId,
+      t.accommodationId,
+    ),
+  ],
+);

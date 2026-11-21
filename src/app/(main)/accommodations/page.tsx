@@ -1,10 +1,26 @@
+import { headers } from "next/headers";
+import { and, eq } from "drizzle-orm";
+//Global Imports
+import { auth } from "@/lib/auth";
 import { db } from "@/db";
-import { accommodations } from "@/db/schema";
+import { accommodations, favorites } from "@/db/schema";
 import { PageHeader } from "@/components/shared/pageHeader";
 import { AccommodationCard } from "@/components/shared/accommodationCard";
 
 export default async function AccommodationsPage() {
-  const allAccommodations = await db.select().from(accommodations);
+  const session = await auth.api.getSession({ headers: await headers() });
+  const userId = session?.user.id ?? "";
+
+  const rows = await db
+    .select()
+    .from(accommodations)
+    .leftJoin(
+      favorites,
+      and(
+        eq(favorites.accommodationId, accommodations.id),
+        eq(favorites.userId, userId),
+      ),
+    );
 
   return (
     <div className="space-y-6">
@@ -13,8 +29,12 @@ export default async function AccommodationsPage() {
         description="برای ثبت اقامتگاه فرم زیر را تکمیل کنید."
       />
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  gap-4">
-        {allAccommodations.map((i) => (
-          <AccommodationCard key={i.id} accommodation={i} />
+        {rows.map((i) => (
+          <AccommodationCard
+            key={i.accommodations.id}
+            accommodation={i.accommodations}
+            isFavorited={!!i?.favorites?.id}
+          />
         ))}
       </div>
     </div>
