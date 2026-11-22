@@ -3,6 +3,9 @@ export const ROUTES = {
   sendOtp: "/auth/send-otp",
   accommodations: (q?: string) =>
     q ? `/accommodations?q=${encodeURIComponent(q)}` : "/accommodations",
+  accommodation: {
+    getHref: ({ id }: { id: string }) => `/accommodations/${id}`,
+  },
   // dynamic routes: use functions
   // blog: {
   //   list: "/blog",
@@ -14,9 +17,7 @@ export const ROUTES = {
   // },
   // search: (q: string) => `/search?q=${encodeURIComponent(q)}`,
   // with query params
-  discussions: {
-    getHref: () => "/app/discussions",
-  },
+  discussions: {},
   discussion: {
     getHref: (id: string) => `/app/discussions/${id}`,
   },

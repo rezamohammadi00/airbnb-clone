@@ -19,7 +19,7 @@ import {
   ComboboxList,
 } from "@/components/ui/combobox";
 //Local Imports
-import { createAccommodation } from "./createAccommodation";
+import { createAccommodation } from "./actions";
 import {
   createAccommodationSchema,
   createAccommodationFormValues,
