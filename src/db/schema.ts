@@ -13,6 +13,7 @@ import {
   uuid,
   varchar,
   unique,
+  date,
 } from "drizzle-orm/pg-core";
 
 // categories
@@ -77,3 +78,35 @@ export const favorites = pgTable(
     ),
   ],
 );
+
+//reservations
+const DEFAULT_RESERVATION_STATUS = "pending";
+export const reservationStatus = pgEnum("reservation_status", [
+  DEFAULT_RESERVATION_STATUS,
+  "confirmed",
+  "cancelled",
+  "completed",
+]);
+
+export const reservations = pgTable("reservations", {
+  id: uuid().primaryKey().defaultRandom(),
+
+  userId: text().references(() => user.id, { onDelete: "set null" }),
+  accommodationId: uuid().references(() => accommodations.id, {
+    onDelete: "set null",
+  }),
+
+  checkIn: date().notNull(),
+  checkOut: date().notNull(),
+
+  totalPrice: bigint({ mode: "number" }).notNull(), // Toman
+
+  status: reservationStatus().notNull().default(DEFAULT_RESERVATION_STATUS),
+
+  createdAt: timestamp().notNull().defaultNow(),
+  updatedAt: timestamp()
+    .notNull()
+    .defaultNow()
+    .$onUpdate(() => new Date()),
+});
+export type IReservation = typeof accommodations.$inferSelect;

@@ -4,6 +4,7 @@ import { eq } from "drizzle-orm";
 import { db } from "@/db";
 import { accommodations } from "@/db/schema";
 import { PageHeader } from "@/components/shared/pageHeader";
+import { DatePickerWithRange } from "@/components/shared/datePickerWithRange";
 
 export default async function AccommodationDetailPage({
   params,
@@ -29,6 +30,9 @@ export default async function AccommodationDetailPage({
           alt={""}
           className="object-cover w-full"
         />
+      </div>
+      <div>
+        <DatePickerWithRange />
       </div>
     </div>
   );
